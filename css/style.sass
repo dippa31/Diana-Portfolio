@@ -1,0 +1,92 @@
+@import "variables.sass"
+@import "grid.sass"
+
+// General Styles
+html
+  box-sizing: border-box
+  background-color: $light
+  color: $dark
+  font-family: "Lato-Regular", sans-serif
+  font-size: 16px
+
+*
+  &:before, &:after
+  box-sizing: inherit
+
+html
+  box-sizing: border-box
+
+.container
+  max-width: 1200px
+  margin: 0 auto
+
+
+h1
+  font-size: 16px
+  margin: 0
+
+a
+  text-decoration: none
+  color: $dark
+
+ul
+  list-style: none
+  padding-left: 0
+
+// Header
+
+header
+  padding-top: 40px
+  height: 75vh
+
+h1
+  padding-left: 20px
+
+// Years
+.year
+  font-family: "Cormorant Garamond", serif
+  font-size: 16px
+  margin-left: -30px
+  transform: rotate(-90deg)
+  align-self: baseline
+  
+
+// Sections
+
+section
+  border-top: 1px solid $gray
+  margin-bottom: 100px
+
+
+.main_copy
+  margin-left: 30px
+  display: flex
+  flex-direction: column
+  p
+   margin-top: 100vh - 66
+   max-width: 300px
+   font-family: "Cormorant Garamond", serif
+   font-size: 28px
+  //  background-color: pink
+
+.work_with_me
+  a
+   margin-left: 20px
+
+.projects_names
+  li
+   padding-left: 20px
+
+// images
+
+.image
+  border-radius: 6px
+  margin-bottom: 12px
+  max-width: 384px
+
+// Gallery
+.gallery_1st, .gallery_2nd
+  display: flex
+  flex-direction: column
+  margin-top: -30px
+  align-items: flex-end
