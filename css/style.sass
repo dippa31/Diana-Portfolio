@@ -7,7 +7,10 @@ html
   background-color: $light
   color: $dark
   font-family: "Lato-Light", sans-serif
-  font-size: 16px
+  font-size: 14px
+
+  @media screen and (min-width: 800px)
+   font-size: 16px
 
 *
   padding: 0
@@ -24,13 +27,15 @@ html
   margin: 0 auto
 
 h1
-  font-size: 16px
+  font-size: 14px
   margin: 0
+
+  @media screen and (min-width: 800px)
+   font-size: 16px
 
 a
   text-decoration: none
   color: $dark
-
 
 ul
   list-style: none
@@ -42,6 +47,10 @@ header
   padding-top: 40px
   height: 75vh
 
+  // @media screen and (min-width: 800px)
+  //  padding-top: 40px
+  //  height: 75vh
+
 h1
   padding-left: 20px
   font-weight: lighter
@@ -52,11 +61,17 @@ h1
   font-family: "Cormorant Garamond", serif
   font-size: 16px
   font-weight: lighter
-  margin-left: -30px
+  // margin-left: -30px
   transform: rotate(-90deg)
   align-self: baseline
-  position: absolute
+  // position: absolute
   margin-top: 24px
+
+
+  @media screen and (min-width: 1200px)
+    margin-left: -30px
+    position: absolute
+
 
 // Sections
 
@@ -65,7 +80,6 @@ section
   margin-bottom: 100px
 
 .main_copy
-  margin-left: 30px
   display: flex
   flex-direction: column
   p
@@ -73,7 +87,6 @@ section
    max-width: 300px
    font-family: "Cormorant Garamond Light", serif
    font-size: 28px
-  // background-color: pink
 
 .work_with_me
   a
@@ -88,11 +101,16 @@ section
 // images
 
 .image
-  border-radius: 6px
   margin-bottom: 15px
-  max-width: 384px
+  width: 100%
+  display: block
+  opacity: 0
+
+  img
+   max-width: 384px
+   border-radius: 0
+
   img:hover
-   border-radius: 6px
    box-shadow: 0px 2px 8px 1px lighten($dark, 64%)
    transition: box-shadow 300ms ease-in-out
 
@@ -100,6 +118,22 @@ section
   max-width: 384px
   min-height: 342px
   background-color: $light
+  visibility: hidden
+
+
+// Images Animation
+
+.image.is-visible
+  animation: image 600ms ease-in forwards
+
+@keyframes image
+  0%
+    opacity: 0
+
+  100%
+    opacity: 1
+
+
 
 // Gallery
 

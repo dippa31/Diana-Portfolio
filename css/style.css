@@ -37,7 +37,10 @@ html {
   background-color: #F9F9F9;
   color: #231F20;
   font-family: "Lato-Light", sans-serif;
-  font-size: 16px; }
+  font-size: 14px; }
+  @media screen and (min-width: 800px) {
+    html {
+      font-size: 16px; } }
 
 * {
   padding: 0;
@@ -53,8 +56,11 @@ html {
   margin: 0 auto; }
 
 h1 {
-  font-size: 16px;
+  font-size: 14px;
   margin: 0; }
+  @media screen and (min-width: 800px) {
+    h1 {
+      font-size: 16px; } }
 
 a {
   text-decoration: none;
@@ -76,22 +82,23 @@ h1 {
   font-family: "Cormorant Garamond", serif;
   font-size: 16px;
   font-weight: lighter;
-  margin-left: -30px;
   -webkit-transform: rotate(-90deg);
   -ms-transform: rotate(-90deg);
   transform: rotate(-90deg);
   -webkit-align-self: baseline;
   -ms-flex-item-align: baseline;
   align-self: baseline;
-  position: absolute;
   margin-top: 24px; }
+  @media screen and (min-width: 1200px) {
+    .year {
+      margin-left: -30px;
+      position: absolute; } }
 
 section {
   border-top: 1px solid #d6d1d2;
   margin-bottom: 100px; }
 
 .main_copy {
-  margin-left: 30px;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -114,18 +121,38 @@ section {
     margin-bottom: 20px; }
 
 .image {
-  border-radius: 6px;
   margin-bottom: 15px;
-  max-width: 384px; }
+  width: 100%;
+  display: block;
+  opacity: 0; }
+  .image img {
+    max-width: 384px;
+    border-radius: 0; }
   .image img:hover {
-    border-radius: 6px;
     box-shadow: 0px 2px 8px 1px #c8c1c2;
     transition: box-shadow 300ms ease-in-out; }
 
 .image_space {
   max-width: 384px;
   min-height: 342px;
-  background-color: #F9F9F9; }
+  background-color: #F9F9F9;
+  visibility: hidden; }
+
+.image.is-visible {
+  -webkit-animation: image 600ms ease-in forwards;
+  animation: image 600ms ease-in forwards; }
+
+@-webkit-keyframes image {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@keyframes image {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
 
 .gallery_1st, .gallery_2nd {
   display: -webkit-flex;
