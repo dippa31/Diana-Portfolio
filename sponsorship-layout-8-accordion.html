@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sponsorship Tiers - Accordion</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/normalize.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .accordion-container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(35, 31, 32, 0.1);
+            overflow: hidden;
+        }
+        
+        .accordion-item {
+            border-bottom: 1px solid #F0F0F0;
+        }
+        
+        .accordion-item:last-child {
+            border-bottom: none;
+        }
+        
+        .accordion-header {
+            padding: 25px 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            background: linear-gradient(135deg, #F9F9F9, white);
+        }
+        
+        .accordion-header:hover {
+            background: linear-gradient(135deg, #F0F0F0, #F9F9F9);
+        }
+        
+        .accordion-header.active {
+            background: linear-gradient(135deg, #231F20, #2a2526);
+            color: #F9F9F9;
+        }
+        
+        .accordion-item:nth-child(1) .accordion-header.active {
+            background: linear-gradient(135deg, #24ACA8, #20918d);
+        }
+        .accordion-item:nth-child(2) .accordion-header.active {
+            background: linear-gradient(135deg, #5974B4, #4a5f96);
+        }
+        .accordion-item:nth-child(3) .accordion-header.active {
+            background: linear-gradient(135deg, #8E3DC1, #7a349f);
+        }
+        .accordion-item:nth-child(4) .accordion-header.active {
+            background: linear-gradient(135deg, #B019C9, #9515a6);
+        }
+        .accordion-item:nth-child(5) .accordion-header.active {
+            background: linear-gradient(135deg, #231F20, #1a1618);
+        }
+        
+        .tier-summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .tier-info-acc {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .tier-name-acc {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 28px;
+            font-weight: bold;
+            color: #231F20;
+            transition: color 0.3s ease;
+        }
+        
+        .accordion-header.active .tier-name-acc {
+            color: #F9F9F9;
+        }
+        
+        .tier-tagline {
+            font-size: 14px;
+            color: #666;
+            font-style: italic;
+            transition: color 0.3s ease;
+        }
+        
+        .accordion-header.active .tier-tagline {
+            color: rgba(249, 249, 249, 0.8);
+        }
+        
+        .tier-price-acc {
+            font-size: 32px;
+            font-weight: bold;
+            color: #24ACA8;
+            transition: color 0.3s ease;
+        }
+        
+        .accordion-item:nth-child(1) .tier-price-acc { color: #24ACA8; }
+        .accordion-item:nth-child(2) .tier-price-acc { color: #5974B4; }
+        .accordion-item:nth-child(3) .tier-price-acc { color: #8E3DC1; }
+        .accordion-item:nth-child(4) .tier-price-acc { color: #B019C9; }
+        .accordion-item:nth-child(5) .tier-price-acc { color: #231F20; }
+        
+        .accordion-header.active .tier-price-acc {
+            color: #F9F9F9;
+        }
+        
+        .accordion-toggle {
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 30px;
+            background: rgba(35, 31, 32, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #231F20;
+            transition: all 0.3s ease;
+        }
+        
+        .accordion-header.active .accordion-toggle {
+            background: rgba(249, 249, 249, 0.2);
+            color: #F9F9F9;
+            transform: translateY(-50%) rotate(45deg);
+        }
+        
+        .accordion-content {
+            display: none;
+            padding: 0 30px 30px;
+            background: #F9F9F9;
+        }
+        
+        .tier-description-acc {
+            font-size: 18px;
+            line-height: 1.7;
+            color: #231F20;
+            margin-bottom: 25px;
+        }
+        
+        .benefits-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .benefit-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(35, 31, 32, 0.05);
+            transition: all 0.3s ease;
+            border-left: 4px solid #24ACA8;
+        }
+        
+        .accordion-item:nth-child(1) .benefit-card { border-left-color: #24ACA8; }
+        .accordion-item:nth-child(2) .benefit-card { border-left-color: #5974B4; }
+        .accordion-item:nth-child(3) .benefit-card { border-left-color: #8E3DC1; }
+        .accordion-item:nth-child(4) .benefit-card { border-left-color: #B019C9; }
+        .accordion-item:nth-child(5) .benefit-card { border-left-color: #231F20; }
+        
+        .benefit-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(35, 31, 32, 0.1);
+        }
+        
+        .benefit-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #24ACA8;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        
+        .accordion-item:nth-child(1) .benefit-icon { background: #24ACA8; }
+        .accordion-item:nth-child(2) .benefit-icon { background: #5974B4; }
+        .accordion-item:nth-child(3) .benefit-icon { background: #8E3DC1; }
+        .accordion-item:nth-child(4) .benefit-icon { background: #B019C9; }
+        .accordion-item:nth-child(5) .benefit-icon { background: #231F20; }
+        
+        .benefit-title-acc {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 18px;
+            font-weight: bold;
+            color: #231F20;
+            margin-bottom: 8px;
+        }
+        
+        .benefit-desc-acc {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .accordion-cta {
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+        .cta-button-acc {
+            background: #24ACA8;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .accordion-item:nth-child(1) .cta-button-acc { background: #24ACA8; }
+        .accordion-item:nth-child(2) .cta-button-acc { background: #5974B4; }
+        .accordion-item:nth-child(3) .cta-button-acc { background: #8E3DC1; }
+        .accordion-item:nth-child(4) .cta-button-acc { background: #B019C9; }
+        .accordion-item:nth-child(5) .cta-button-acc { background: #231F20; }
+        
+        .cta-button-acc:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(35, 31, 32, 0.3);
+        }
+        
+        @media screen and (max-width: 799px) {
+            .accordion-header {
+                padding: 20px;
+            }
+            
+            .tier-summary {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .tier-name-acc {
+                font-size: 24px;
+            }
+            
+            .tier-price-acc {
+                font-size: 24px;
+            }
+            
+            .accordion-toggle {
+                right: 20px;
+            }
+            
+            .accordion-content {
+                padding: 0 20px 20px;
+            }
+            
+            .benefits-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="container">
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 36px; margin-bottom: 20px; color: #231F20; text-align: center;">Partnership Options</h2>
+        
+        <div class="accordion-container">
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <div class="tier-summary">
+                        <div class="tier-info-acc">
+                            <div class="tier-name-acc">Pioneers</div>
+                            <div class="tier-tagline">Industry Leadership Tier</div>
+                        </div>
+                        <div class="tier-price-acc">$1.5M+</div>
+                    </div>
+                    <div class="accordion-toggle">+</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="tier-description-acc">
+                        Shape the direction of the industry. Gain top-tier access to insights, strategy sessions, and collaborative campaign development.
+                    </div>
+                    <div class="benefits-list">
+                        <div class="benefit-card">
+                            <div class="benefit-icon">👑</div>
+                            <div class="benefit-title-acc">Industry Leadership</div>
+                            <div class="benefit-desc-acc">Lead strategic initiatives and influence industry standards</div>
+                        </div>
+                        <div class="benefit-card">
+                            <div class="benefit-icon">🎯</div>
+                            <div class="benefit-title-acc">Exclusive Access</div>
+                            <div class="benefit-desc-acc">Top-tier insights and early access to developments</div>
+                        </div>
+                        <div class="benefit-card">
+                            <div class="benefit-icon">🤝</div>
+                            <div class="benefit-title-acc">Strategy Sessions</div>
+                            <div class="benefit-desc-acc">Direct participation in high-level planning</div>
+                        </div>
+                        <div class="benefit-card">
+                            <div class="benefit-icon">🚀</div>
+                            <div class="benefit-title-acc">Campaign Development</div>
+                            <div class="benefit-desc-acc">Collaborative industry campaign development</div>
+                        </div>
+                    </div>
+                    <div class="accordion-cta">
+                        <button class="cta-button-acc">Become a Pioneer</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <div class="tier-summary">
+                        <div class="tier-info-acc">
+                            <div class="tier-name-acc">Strategists</div>
+                            <div class="tier-tagline">Strategic Influence Tier</div>
+                        </div>
+                        <div class="tier-price-acc">$750K</div>
+                    </div>
+                    <div class="accordion-toggle">+</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="tier-description-acc">
+                        Influence key decisions with a seat at strategic planning meetings. Receive early briefings and policy updates.
+                    </div>
+                    <div class="benefits-list">
+                        <div class="benefit-card">
+                            <div class="benefit-icon">📊</div>
+                            <div class="benefit-title-acc">Strategic Planning</div>
+                            <div class="benefit-desc-acc">Seat at strategic planning meetings</div>
+                        </div>
+                        <div class="benefit-card">
+                            <div class="benefit-icon">📢</div>
+                            <div class="benefit-title-acc">Early Briefings</div>
+                            <div class="benefit-desc-acc">First access to important updates</div>
+                        </div>
+                        <div class="benefit-card">
+                            <div class="benefit-icon">📋</div>
+                            <div class="benefit-title-acc">Policy Updates</div>
+                            <div class="benefit-desc-acc">Direct communication on policy changes</div>
+                        </div>
+                    </div>
+                    <div class="accordion-cta">
+                        <button class="cta-button-acc">Join as Strategist</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <div class="tier-summary">
+                        <div class="tier-info-acc">
+                            <div class="tier-name-acc">Innovators</div>
+                            <div class="tier-tagline">Innovation & Development Tier</div>
+                        </div>
+                        <div class="tier-price-acc">$300K</div>
+                    </div>
+                    <div class="accordion-toggle">+</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="tier-description-acc">
+                        Join influential working groups and help launch pilot programs that test and scale new retail concepts.
+                    </div>
+                    <div class="benefits-list">
+                        <div class="benefit-card">
+                            <div class="benefit-icon">👥</div>
+                            <div class="benefit-title-acc">Working Groups</div>
+                            <div class="benefit-desc-acc">Participate in influential working groups</div>
+                        </div>
+                        <div class="benefit-card">
+                            <div class="benefit-icon">🧪</div>
+                            <div class="benefit-title-acc">Pilot Programs</div>
+                            <div class="benefit-desc-acc">Help launch and test new initiatives</div>
+                        </div>
+                        <div class="benefit-card">
+                            <div class="benefit-icon">💡</div>
+                            <div class="benefit-title-acc">Innovation</div>
+                            <div class="benefit-desc-acc">Scale new retail concepts</div>
+                        </div>
+                    </div>
+                    <div class="accordion-cta">
+                        <button class="cta-button-acc">Become an Innovator</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <div class="tier-summary">
+                        <div class="tier-info-acc">
+                            <div class="tier-name-acc">Partners</div>
+                            <div class="tier-tagline">Brand Partnership Tier</div>
+                        </div>
+                        <div class="tier-price-acc">$100K</div>
+                    </div>
+                    <div class="accordion-toggle">+</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="tier-description-acc">
+                        Enjoy high-visibility branding, shoutouts across digital platforms, and recognition as a trusted contributor to future-forward retail.
+                    </div>
+                    <div class="benefits-list">
+                        <div class="benefit-card">
+                            <div class="benefit-icon">📱</div>
+                            <div class="benefit-title-acc">Brand Visibility</div>
+                            <div class="benefit-desc-acc">High-visibility branding opportunities</div>
+                        </div>
+                        <div class="benefit-card">
+                            <div class="benefit-icon">🌐</div>
+                            <div class="benefit-title-acc">Digital Recognition</div>
+                            <div class="benefit-desc-acc">Recognition across digital platforms</div>
+                        </div>
+                        <div class="benefit-card">
+                            <div class="benefit-icon">📣</div>
+                            <div class="benefit-title-acc">Platform Shoutouts</div>
+                            <div class="benefit-desc-acc">Regular mentions and shoutouts</div>
+                        </div>
+                    </div>
+                    <div class="accordion-cta">
+                        <button class="cta-button-acc">Partner with Us</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <div class="tier-summary">
+                        <div class="tier-info-acc">
+                            <div class="tier-name-acc">Supporters</div>
+                            <div class="tier-tagline">Community Support Tier</div>
+                        </div>
+                        <div class="tier-price-acc">$10K - $50K</div>
+                    </div>
+                    <div class="accordion-toggle">+</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="tier-description-acc">
+                        Earn a featured badge and acknowledgment on our community wall for advancing responsible, modern retail practices.
+                    </div>
+                    <div class="benefits-list">
+                        <div class="benefit-card">
+                            <div class="benefit-icon">🏆</div>
+                            <div class="benefit-title-acc">Featured Badge</div>
+                            <div class="benefit-desc-acc">Special recognition badge for supporters</div>
+                        </div>
+                        <div class="benefit-card">
+                            <div class="benefit-icon">🏛️</div>
+                            <div class="benefit-title-acc">Community Wall</div>
+                            <div class="benefit-desc-acc">Acknowledgment on community wall</div>
+                        </div>
+                        <div class="benefit-card">
+                            <div class="benefit-icon">⭐</div>
+                            <div class="benefit-title-acc">Recognition</div>
+                            <div class="benefit-desc-acc">Public recognition for support</div>
+                        </div>
+                    </div>
+                    <div class="accordion-cta">
+                        <button class="cta-button-acc">Show Your Support</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script src="js/jquery-3.2.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.accordion-header').click(function() {
+                const $item = $(this).parent();
+                const $content = $item.find('.accordion-content');
+                const $header = $(this);
+                
+                // Close other accordion items
+                $('.accordion-item').not($item).each(function() {
+                    $(this).find('.accordion-content').slideUp(300);
+                    $(this).find('.accordion-header').removeClass('active');
+                });
+                
+                // Toggle current item
+                if ($header.hasClass('active')) {
+                    $content.slideUp(300);
+                    $header.removeClass('active');
+                } else {
+                    $content.slideDown(300);
+                    $header.addClass('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sponsorship Tiers - Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/normalize.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .dashboard-container {
+            margin: 40px 0;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            align-items: start;
+        }
+        
+        .dashboard-sidebar {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(35, 31, 32, 0.1);
+            padding: 30px;
+            position: sticky;
+            top: 20px;
+        }
+        
+        .dashboard-main {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .tier-selector {
+            margin-bottom: 30px;
+        }
+        
+        .selector-title {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 24px;
+            font-weight: bold;
+            color: #231F20;
+            margin-bottom: 20px;
+        }
+        
+        .tier-option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 10px;
+            border: 2px solid transparent;
+        }
+        
+        .tier-option:hover {
+            background: rgba(249, 249, 249, 0.8);
+        }
+        
+        .tier-option.active {
+            background: linear-gradient(135deg, #24ACA8, #20918d);
+            color: white;
+            border-color: #24ACA8;
+        }
+        
+        .tier-option:nth-child(2).active {
+            background: linear-gradient(135deg, #24ACA8, #20918d);
+        }
+        .tier-option:nth-child(3).active {
+            background: linear-gradient(135deg, #5974B4, #4a5f96);
+        }
+        .tier-option:nth-child(4).active {
+            background: linear-gradient(135deg, #8E3DC1, #7a349f);
+        }
+        .tier-option:nth-child(5).active {
+            background: linear-gradient(135deg, #B019C9, #9515a6);
+        }
+        .tier-option:nth-child(6).active {
+            background: linear-gradient(135deg, #231F20, #1a1618);
+        }
+        
+        .tier-radio {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #ccc;
+            margin-right: 15px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .tier-option.active .tier-radio {
+            border-color: white;
+        }
+        
+        .tier-option.active .tier-radio::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: white;
+        }
+        
+        .tier-option-info {
+            flex: 1;
+        }
+        
+        .tier-option-name {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .tier-option-price {
+            font-size: 16px;
+            font-weight: bold;
+            color: #24ACA8;
+        }
+        
+        .tier-option:nth-child(2) .tier-option-price { color: #24ACA8; }
+        .tier-option:nth-child(3) .tier-option-price { color: #5974B4; }
+        .tier-option:nth-child(4) .tier-option-price { color: #8E3DC1; }
+        .tier-option:nth-child(5) .tier-option-price { color: #B019C9; }
+        .tier-option:nth-child(6) .tier-option-price { color: #231F20; }
+        
+        .tier-option.active .tier-option-price {
+            color: white;
+        }
+        
+        .investment-summary {
+            background: linear-gradient(135deg, #F9F9F9, #F0F0F0);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .summary-title {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 18px;
+            font-weight: bold;
+            color: #231F20;
+            margin-bottom: 15px;
+        }
+        
+        .summary-amount {
+            font-size: 32px;
+            font-weight: bold;
+            color: #24ACA8;
+            margin-bottom: 10px;
+        }
+        
+        .summary-period {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .cta-dashboard {
+            width: 100%;
+            padding: 15px 30px;
+            background: #24ACA8;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-dashboard:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(36, 172, 168, 0.3);
+        }
+        
+        .tier-dashboard {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(35, 31, 32, 0.1);
+            padding: 30px;
+            display: none;
+        }
+        
+        .tier-dashboard.active {
+            display: block;
+            animation: fadeInUp 0.5s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #F0F0F0;
+        }
+        
+        .tier-name-dash {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 36px;
+            font-weight: bold;
+            color: #231F20;
+        }
+        
+        .tier-badge-dash {
+            background: #24ACA8;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .metric-card {
+            background: #F9F9F9;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(35, 31, 32, 0.1);
+        }
+        
+        .metric-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #24ACA8;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin: 0 auto 15px;
+        }
+        
+        .metric-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #231F20;
+            margin-bottom: 5px;
+        }
+        
+        .metric-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        
+        .benefits-dashboard {
+            margin-bottom: 30px;
+        }
+        
+        .benefits-title {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 24px;
+            font-weight: bold;
+            color: #231F20;
+            margin-bottom: 20px;
+        }
+        
+        .benefit-progress {
+            margin-bottom: 20px;
+        }
+        
+        .benefit-progress-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .benefit-name {
+            font-size: 16px;
+            font-weight: bold;
+            color: #231F20;
+        }
+        
+        .benefit-percentage {
+            font-size: 14px;
+            color: #24ACA8;
+            font-weight: bold;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: #F0F0F0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #24ACA8, #20918d);
+            border-radius: 4px;
+            transition: width 1s ease-out;
+            width: 0%;
+        }
+        
+        .tier-description-dash {
+            font-size: 18px;
+            line-height: 1.7;
+            color: #231F20;
+            background: linear-gradient(135deg, #F9F9F9, #F0F0F0);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #24ACA8;
+        }
+        
+        @media screen and (max-width: 799px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .dashboard-sidebar {
+                position: static;
+                order: 2;
+            }
+            
+            .dashboard-main {
+                order: 1;
+            }
+            
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="container">
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 36px; margin-bottom: 20px; color: #231F20; text-align: center;">Partnership Dashboard</h2>
+        
+        <div class="dashboard-container">
+            <div class="dashboard-sidebar">
+                <div class="tier-selector">
+                    <div class="selector-title">Select Partnership Level</div>
+                    
+                    <div class="tier-option active" data-tier="pioneers">
+                        <div class="tier-radio"></div>
+                        <div class="tier-option-info">
+                            <div class="tier-option-name">Pioneers</div>
+                            <div class="tier-option-price">$1.5M+</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tier-option" data-tier="strategists">
+                        <div class="tier-radio"></div>
+                        <div class="tier-option-info">
+                            <div class="tier-option-name">Strategists</div>
+                            <div class="tier-option-price">$750K</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tier-option" data-tier="innovators">
+                        <div class="tier-radio"></div>
+                        <div class="tier-option-info">
+                            <div class="tier-option-name">Innovators</div>
+                            <div class="tier-option-price">$300K</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tier-option" data-tier="partners">
+                        <div class="tier-radio"></div>
+                        <div class="tier-option-info">
+                            <div class="tier-option-name">Partners</div>
+                            <div class="tier-option-price">$100K</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tier-option" data-tier="supporters">
+                        <div class="tier-radio"></div>
+                        <div class="tier-option-info">
+                            <div class="tier-option-name">Supporters</div>
+                            <div class="tier-option-price">$10K - $50K</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="investment-summary">
+                    <div class="summary-title">Investment Summary</div>
+                    <div class="summary-amount">$1.5M+</div>
+                    <div class="summary-period">Annual Contribution</div>
+                    <button class="cta-dashboard">Get Started</button>
+                </div>
+            </div>
+            
+            <div class="dashboard-main">
+                <div id="pioneers" class="tier-dashboard active">
+                    <div class="dashboard-header">
+                        <div class="tier-name-dash">Pioneers</div>
+                        <div class="tier-badge-dash">Premium Tier</div>
+                    </div>
+                    
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-icon">👑</div>
+                            <div class="metric-value">100%</div>
+                            <div class="metric-label">Industry Influence</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon">🎯</div>
+                            <div class="metric-value">24/7</div>
+                            <div class="metric-label">Strategy Access</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon">🚀</div>
+                            <div class="metric-value">Unlimited</div>
+                            <div class="metric-label">Campaign Involvement</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon">📊</div>
+                            <div class="metric-value">Priority</div>
+                            <div class="metric-label">Support Level</div>
+                        </div>
+                    </div>
+                    
+                    <div class="benefits-dashboard">
+                        <div class="benefits-title">Benefit Coverage</div>
+                        
+                        <div class="benefit-progress">
+                            <div class="benefit-progress-label">
+                                <span class="benefit-name">Industry Leadership</span>
+                                <span class="benefit-percentage">100%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" data-width="100"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="benefit-progress">
+                            <div class="benefit-progress-label">
+                                <span class="benefit-name">Strategy Sessions</span>
+                                <span class="benefit-percentage">100%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" data-width="100"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="benefit-progress">
+                            <div class="benefit-progress-label">
+                                <span class="benefit-name">Campaign Development</span>
+                                <span class="benefit-percentage">100%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" data-width="100"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="benefit-progress">
+                            <div class="benefit-progress-label">
+                                <span class="benefit-name">Exclusive Insights</span>
+                                <span class="benefit-percentage">100%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" data-width="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tier-description-dash">
+                        Shape the direction of the industry. Gain top-tier access to insights, strategy sessions, and collaborative campaign development. As a Pioneer, you'll have maximum influence over industry direction and exclusive access to all strategic initiatives.
+                    </div>
+                </div>
+                
+                <div id="strategists" class="tier-dashboard">
+                    <div class="dashboard-header">
+                        <div class="tier-name-dash">Strategists</div>
+                        <div class="tier-badge-dash">Strategic Tier</div>
+                    </div>
+                    
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-icon">📊</div>
+                            <div class="metric-value">85%</div>
+                            <div class="metric-label">Strategic Influence</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon">📢</div>
+                            <div class="metric-value">Early</div>
+                            <div class="metric-label">Briefing Access</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon">🎯</div>
+                            <div class="metric-value">High</div>
+                            <div class="metric-label">Decision Impact</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon">📋</div>
+                            <div class="metric-value">Real-time</div>
+                            <div class="metric-label">Policy Updates</div>
+                        </div>
+                    </div>
+                    
+                    <div class="benefits-dashboard">
+                        <div class="benefits-title">Benefit Coverage</div>
+                        
+                        <div class="benefit-progress">
+                            <div class="benefit-progress-label">
+                                <span class="benefit-name">Strategic Planning</span>
+                                <span class="benefit-percentage">100%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" data-width="100"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="benefit-progress">
+                            <div class="benefit-progress-label">
+                                <span class="benefit-name">Early Briefings</span>
+                                <span class="benefit-percentage">100%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" data-width="100"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="benefit-progress">
+                            <div class="benefit-progress-label">
+                                <span class="benefit-name">Policy Updates</span>
+                                <span class="benefit-percentage">100%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" data-width="100"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="benefit-progress">
+                            <div class="benefit-progress-label">
+                                <span class="benefit-name">Industry Leadership</span>
+                                <span class="benefit-percentage">0%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" data-width="0"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tier-description-dash">
+                        Influence key decisions with a seat at strategic planning meetings. Receive early briefings and policy updates. Strategists play a crucial role in shaping organizational direction through strategic input and early access to key information.
+                    </div>
+                </div>
+                
+                <!-- Additional tier dashboards would be similar... -->
+            </div>
+        </div>
+    </section>
+    
+    <script src="js/jquery-3.2.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Handle tier selection
+            $('.tier-option').click(function() {
+                const tierName = $(this).data('tier');
+                
+                // Update active states
+                $('.tier-option').removeClass('active');
+                $(this).addClass('active');
+                
+                $('.tier-dashboard').removeClass('active');
+                $('#' + tierName).addClass('active');
+                
+                // Update investment summary
+                const price = $(this).find('.tier-option-price').text();
+                $('.summary-amount').text(price);
+                
+                // Animate progress bars
+                setTimeout(function() {
+                    $('#' + tierName + ' .progress-fill').each(function() {
+                        const width = $(this).data('width');
+                        $(this).css('width', width + '%');
+                    });
+                }, 300);
+            });
+            
+            // Initial progress bar animation
+            setTimeout(function() {
+                $('.tier-dashboard.active .progress-fill').each(function() {
+                    const width = $(this).data('width');
+                    $(this).css('width', width + '%');
+                });
+            }, 500);
+        });
+    </script>
+</body>
+</html>

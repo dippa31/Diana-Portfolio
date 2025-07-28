@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sponsorship Tiers - Pricing Cards</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/normalize.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .pricing-container {
+            margin: 40px 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            align-items: start;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(35, 31, 32, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(35, 31, 32, 0.15);
+        }
+        
+        .pricing-card.featured {
+            transform: scale(1.05);
+            border: 3px solid #24ACA8;
+        }
+        
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+        
+        .card-header {
+            padding: 30px;
+            text-align: center;
+            background: linear-gradient(135deg, #F9F9F9, white);
+            position: relative;
+        }
+        
+        .pricing-card:nth-child(1) .card-header {
+            background: linear-gradient(135deg, #24ACA8, #20918d);
+            color: white;
+        }
+        .pricing-card:nth-child(2) .card-header {
+            background: linear-gradient(135deg, #5974B4, #4a5f96);
+            color: white;
+        }
+        .pricing-card:nth-child(3) .card-header {
+            background: linear-gradient(135deg, #8E3DC1, #7a349f);
+            color: white;
+        }
+        .pricing-card:nth-child(4) .card-header {
+            background: linear-gradient(135deg, #B019C9, #9515a6);
+            color: white;
+        }
+        .pricing-card:nth-child(5) .card-header {
+            background: linear-gradient(135deg, #231F20, #1a1618);
+            color: white;
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #FF6B6B;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+        
+        .tier-icon-pricing {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            margin: 0 auto 20px;
+        }
+        
+        .tier-name-pricing {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .tier-subtitle-pricing {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+        
+        .price-section {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .price-amount {
+            font-size: 48px;
+            font-weight: bold;
+            line-height: 1;
+        }
+        
+        .price-period {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+        
+        .card-body {
+            padding: 30px;
+        }
+        
+        .tier-description-pricing {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #231F20;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .features-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 30px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(35, 31, 32, 0.05);
+        }
+        
+        .feature-item:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-check {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #24ACA8;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .pricing-card:nth-child(1) .feature-check { background: #24ACA8; }
+        .pricing-card:nth-child(2) .feature-check { background: #5974B4; }
+        .pricing-card:nth-child(3) .feature-check { background: #8E3DC1; }
+        .pricing-card:nth-child(4) .feature-check { background: #B019C9; }
+        .pricing-card:nth-child(5) .feature-check { background: #231F20; }
+        
+        .feature-text {
+            font-size: 14px;
+            color: #231F20;
+            line-height: 1.4;
+        }
+        
+        .card-footer {
+            padding: 0 30px 30px;
+            text-align: center;
+        }
+        
+        .pricing-cta {
+            width: 100%;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #24ACA8;
+            color: white;
+        }
+        
+        .pricing-card:nth-child(1) .pricing-cta { background: #24ACA8; }
+        .pricing-card:nth-child(2) .pricing-cta { background: #5974B4; }
+        .pricing-card:nth-child(3) .pricing-cta { background: #8E3DC1; }
+        .pricing-card:nth-child(4) .pricing-cta { background: #B019C9; }
+        .pricing-card:nth-child(5) .pricing-cta { background: #231F20; }
+        
+        .pricing-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(35, 31, 32, 0.3);
+        }
+        
+        .value-highlight {
+            background: rgba(36, 172, 168, 0.1);
+            border: 1px solid rgba(36, 172, 168, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .pricing-card:nth-child(1) .value-highlight {
+            background: rgba(36, 172, 168, 0.1);
+            border-color: rgba(36, 172, 168, 0.2);
+        }
+        .pricing-card:nth-child(2) .value-highlight {
+            background: rgba(89, 116, 180, 0.1);
+            border-color: rgba(89, 116, 180, 0.2);
+        }
+        .pricing-card:nth-child(3) .value-highlight {
+            background: rgba(142, 61, 193, 0.1);
+            border-color: rgba(142, 61, 193, 0.2);
+        }
+        .pricing-card:nth-child(4) .value-highlight {
+            background: rgba(176, 25, 201, 0.1);
+            border-color: rgba(176, 25, 201, 0.2);
+        }
+        .pricing-card:nth-child(5) .value-highlight {
+            background: rgba(35, 31, 32, 0.1);
+            border-color: rgba(35, 31, 32, 0.2);
+        }
+        
+        .value-text {
+            font-size: 12px;
+            font-weight: bold;
+            color: #24ACA8;
+            text-transform: uppercase;
+        }
+        
+        .pricing-card:nth-child(1) .value-text { color: #24ACA8; }
+        .pricing-card:nth-child(2) .value-text { color: #5974B4; }
+        .pricing-card:nth-child(3) .value-text { color: #8E3DC1; }
+        .pricing-card:nth-child(4) .value-text { color: #B019C9; }
+        .pricing-card:nth-child(5) .value-text { color: #231F20; }
+        
+        @media screen and (max-width: 799px) {
+            .pricing-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .pricing-card.featured {
+                transform: none;
+            }
+            
+            .pricing-card.featured:hover {
+                transform: translateY(-10px);
+            }
+            
+            .card-header,
+            .card-body,
+            .card-footer {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="container">
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 36px; margin-bottom: 20px; color: #231F20; text-align: center;">Choose Your Partnership Level</h2>
+        
+        <div class="pricing-container">
+            <div class="pricing-card featured">
+                <div class="popular-badge">Most Popular</div>
+                <div class="card-header">
+                    <div class="tier-icon-pricing">👑</div>
+                    <div class="tier-name-pricing">Pioneers</div>
+                    <div class="tier-subtitle-pricing">Industry Leadership</div>
+                    <div class="price-section">
+                        <div class="price-amount">$1.5M+</div>
+                        <div class="price-period">Annually</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="value-highlight">
+                        <div class="value-text">Maximum Impact & Influence</div>
+                    </div>
+                    <div class="tier-description-pricing">
+                        Shape the direction of the industry with top-tier access and collaborative development.
+                    </div>
+                    <ul class="features-list">
+                        <li class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <div class="feature-text">Industry leadership role</div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <div class="feature-text">Exclusive strategy sessions</div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <div class="feature-text">Campaign development access</div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <div class="feature-text">Top-tier insights & briefings</div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <div class="feature-text">Priority support & consultation</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <button class="pricing-cta">Become a Pioneer</button>
+                </div>
+            </div>
+            
+            <div class="pricing-card">
+                <div class="card-header">
+                    <div class="tier-icon-pricing">🎯</div>
+                    <div class="tier-name-pricing">Strategists</div>
+                    <div class="tier-subtitle-pricing">Strategic Influence</div>
+                    <div class="price-section">
+                        <div class="price-amount">$750K</div>
+                        <div class="price-period">Annually</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="value-highlight">
+                        <div class="value-text">Strategic Decision Making</div>
+                    </div>
+                    <div class="tier-description-pricing">
+                        Influence key decisions with strategic planning access and early briefings.
+                    </div>
+                    <ul class="features-list">
+                        <li class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <div class="feature-text">Strategic planning meetings</div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <div class="feature-text">Early briefings & updates</div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <div class="feature-text">Policy update communications</div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <div class="feature-text">Decision influence opportunities</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <button class="pricing-cta">Join as Strategist</button>
+                </div>
+            </div>
+            
+            <div class="pricing-card">
+                <div class="card-header">
+                    <div class="tier-icon-pricing">💡</div>
+                    <div class="tier-name-pricing">Innovators</div>
+                    <div class="tier-subtitle-pricing">Innovation & Development</div>
+                    <div class="price-section">
+                        <div class="price-amount">$300K</div>
+                        <div class="price-period">Annually</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="value-highlight">
+                        <div class="value-text">Innovation Leadership</div>
+                    </div>
+                    <div class="tier-description-pricing">
+                        Lead innovation through working groups and pilot program development.
+                    </div>
+                    <ul class="features-list">
+                        <li class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <div class="feature-text">Influential working groups</div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <div class="feature-text">Pilot program launches</div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <div class="feature-text">Retail concept scaling</div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <div class="feature-text">Innovation testing access</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <button class="pricing-cta">Become an Innovator</button>
+                </div>
+            </div>
+            
+            <div class="pricing-card">
+                <div class="card-header">
+                    <div class="tier-icon-pricing">🤝</div>
+                    <div class="tier-name-pricing">Partners</div>
+                    <div class="tier-subtitle-pricing">Brand Partnership</div>
+                    <div class="price-section">
+                        <div class="price-amount">$100K</div>
+                        <div class="price-period">Annually</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="value-highlight">
+                        <div class="value-text">Brand Visibility</div>
+                    </div>
+                    <div class="tier-description-pricing">
+                        Maximize brand visibility with digital recognition and platform presence.
+                    </div>
+                    <ul class="features-list">
+                        <li class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <div class="feature-text">High-visibility branding</div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <div class="feature-text">Digital platform recognition</div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <div class="feature-text">Regular platform shoutouts</div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <div class="feature-text">Trusted contributor status</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <button class="pricing-cta">Partner with Us</button>
+                </div>
+            </div>
+            
+            <div class="pricing-card">
+                <div class="card-header">
+                    <div class="tier-icon-pricing">⭐</div>
+                    <div class="tier-name-pricing">Supporters</div>
+                    <div class="tier-subtitle-pricing">Community Support</div>
+                    <div class="price-section">
+                        <div class="price-amount">$10K+</div>
+                        <div class="price-period">Annually</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="value-highlight">
+                        <div class="value-text">Community Recognition</div>
+                    </div>
+                    <div class="tier-description-pricing">
+                        Support modern retail practices with community recognition and badges.
+                    </div>
+                    <ul class="features-list">
+                        <li class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <div class="feature-text">Featured supporter badge</div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <div class="feature-text">Community wall recognition</div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <div class="feature-text">Public acknowledgment</div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <div class="feature-text">Community events access</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <button class="pricing-cta">Show Your Support</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script src="js/jquery-3.2.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Stagger animation for cards
+            $('.pricing-card').each(function(i) {
+                $(this).css('opacity', '0').css('transform', 'translateY(30px)');
+                setTimeout(function() {
+                    $('.pricing-card').eq(i).animate({
+                        opacity: 1
+                    }, 600).css('transform', 'translateY(0)');
+                }, 150 * i);
+            });
+            
+            // Add pulse animation to popular badge
+            setInterval(function() {
+                $('.popular-badge').css('animation', 'pulse 1s ease-in-out');
+                setTimeout(function() {
+                    $('.popular-badge').css('animation', '');
+                }, 1000);
+            }, 3000);
+        });
+    </script>
+    
+    <style>
+        @keyframes pulse {
+            0% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.1); }
+            100% { transform: translateX(-50%) scale(1); }
+        }
+    </style>
+</body>
+</html>

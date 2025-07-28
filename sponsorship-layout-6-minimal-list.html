@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sponsorship Tiers - Minimal List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/normalize.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .minimal-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .tier-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .tier-item {
+            padding: 40px 0;
+            border-bottom: 1px solid rgba(35, 31, 32, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .tier-item:last-child {
+            border-bottom: none;
+        }
+        
+        .tier-item:hover {
+            background: rgba(249, 249, 249, 0.5);
+            margin: 0 -20px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        
+        .tier-item:hover::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #24ACA8;
+        }
+        
+        .tier-item:nth-child(1):hover::before { background: #24ACA8; }
+        .tier-item:nth-child(2):hover::before { background: #5974B4; }
+        .tier-item:nth-child(3):hover::before { background: #8E3DC1; }
+        .tier-item:nth-child(4):hover::before { background: #B019C9; }
+        .tier-item:nth-child(5):hover::before { background: #231F20; }
+        
+        .tier-header-minimal {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 15px;
+        }
+        
+        .tier-name-minimal {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 32px;
+            font-weight: normal;
+            color: #231F20;
+            letter-spacing: -0.5px;
+        }
+        
+        .tier-price-minimal {
+            font-family: "Lato-Light", sans-serif;
+            font-size: 24px;
+            font-weight: bold;
+            color: #24ACA8;
+            opacity: 0.8;
+        }
+        
+        .tier-item:nth-child(1) .tier-price-minimal { color: #24ACA8; }
+        .tier-item:nth-child(2) .tier-price-minimal { color: #5974B4; }
+        .tier-item:nth-child(3) .tier-price-minimal { color: #8E3DC1; }
+        .tier-item:nth-child(4) .tier-price-minimal { color: #B019C9; }
+        .tier-item:nth-child(5) .tier-price-minimal { color: #231F20; }
+        
+        .tier-description-minimal {
+            font-family: "Lato-Light", sans-serif;
+            font-size: 16px;
+            line-height: 1.7;
+            color: #231F20;
+            max-width: 600px;
+            opacity: 0.8;
+        }
+        
+        .tier-number {
+            position: absolute;
+            left: -60px;
+            top: 40px;
+            font-family: "Cormorant Garamond", serif;
+            font-size: 72px;
+            font-weight: bold;
+            color: rgba(35, 31, 32, 0.05);
+            line-height: 1;
+            z-index: -1;
+        }
+        
+        @media screen and (max-width: 799px) {
+            .tier-header-minimal {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+            
+            .tier-name-minimal {
+                font-size: 28px;
+            }
+            
+            .tier-price-minimal {
+                font-size: 20px;
+            }
+            
+            .tier-number {
+                display: none;
+            }
+            
+            .tier-item:hover {
+                margin: 0;
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <section class="container">
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 36px; margin-bottom: 60px; color: #231F20; text-align: center; font-weight: normal;">Partnership Levels</h2>
+        
+        <div class="minimal-container">
+            <ul class="tier-list">
+                <li class="tier-item fade-in">
+                    <div class="tier-number">01</div>
+                    <div class="tier-header-minimal">
+                        <h3 class="tier-name-minimal">Pioneers</h3>
+                        <span class="tier-price-minimal">$1.5M+</span>
+                    </div>
+                    <p class="tier-description-minimal">
+                        Shape the direction of the industry. Gain top-tier access to insights, strategy sessions, and collaborative campaign development.
+                    </p>
+                </li>
+                
+                <li class="tier-item fade-in">
+                    <div class="tier-number">02</div>
+                    <div class="tier-header-minimal">
+                        <h3 class="tier-name-minimal">Strategists</h3>
+                        <span class="tier-price-minimal">$750K</span>
+                    </div>
+                    <p class="tier-description-minimal">
+                        Influence key decisions with a seat at strategic planning meetings. Receive early briefings and policy updates.
+                    </p>
+                </li>
+                
+                <li class="tier-item fade-in">
+                    <div class="tier-number">03</div>
+                    <div class="tier-header-minimal">
+                        <h3 class="tier-name-minimal">Innovators</h3>
+                        <span class="tier-price-minimal">$300K</span>
+                    </div>
+                    <p class="tier-description-minimal">
+                        Join influential working groups and help launch pilot programs that test and scale new retail concepts.
+                    </p>
+                </li>
+                
+                <li class="tier-item fade-in">
+                    <div class="tier-number">04</div>
+                    <div class="tier-header-minimal">
+                        <h3 class="tier-name-minimal">Partners</h3>
+                        <span class="tier-price-minimal">$100K</span>
+                    </div>
+                    <p class="tier-description-minimal">
+                        Enjoy high-visibility branding, shoutouts across digital platforms, and recognition as a trusted contributor to future-forward retail.
+                    </p>
+                </li>
+                
+                <li class="tier-item fade-in">
+                    <div class="tier-number">05</div>
+                    <div class="tier-header-minimal">
+                        <h3 class="tier-name-minimal">Supporters</h3>
+                        <span class="tier-price-minimal">$10K - $50K</span>
+                    </div>
+                    <p class="tier-description-minimal">
+                        Earn a featured badge and acknowledgment on our community wall for advancing responsible, modern retail practices.
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </section>
+    
+    <script src="js/jquery-3.2.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Intersection Observer for fade-in animation
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+            
+            $('.fade-in').each(function() {
+                observer.observe(this);
+            });
+        });
+    </script>
+</body>
+</html>

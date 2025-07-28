@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sponsorship Tiers - Card Grid</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/normalize.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .sponsorship-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .tier-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(35, 31, 32, 0.1);
+            transition: all 0.3s ease;
+            border-top: 4px solid #24ACA8;
+            position: relative;
+        }
+        
+        .tier-card:nth-child(1) { border-top-color: #24ACA8; }
+        .tier-card:nth-child(2) { border-top-color: #5974B4; }
+        .tier-card:nth-child(3) { border-top-color: #8E3DC1; }
+        .tier-card:nth-child(4) { border-top-color: #B019C9; }
+        .tier-card:nth-child(5) { border-top-color: #231F20; }
+        
+        .tier-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 30px rgba(35, 31, 32, 0.15);
+        }
+        
+        .tier-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #F0F0F0;
+        }
+        
+        .tier-name {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 24px;
+            font-weight: bold;
+            color: #231F20;
+        }
+        
+        .tier-contribution {
+            font-size: 20px;
+            font-weight: bold;
+            color: #24ACA8;
+        }
+        
+        .tier-card:nth-child(1) .tier-contribution { color: #24ACA8; }
+        .tier-card:nth-child(2) .tier-contribution { color: #5974B4; }
+        .tier-card:nth-child(3) .tier-contribution { color: #8E3DC1; }
+        .tier-card:nth-child(4) .tier-contribution { color: #B019C9; }
+        .tier-card:nth-child(5) .tier-contribution { color: #231F20; }
+        
+        .tier-highlights {
+            line-height: 1.6;
+            color: #231F20;
+        }
+        
+        .tier-badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: #24ACA8;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .tier-card:nth-child(1) .tier-badge { 
+            background: #24ACA8; 
+            content: "Premium";
+        }
+        
+        @media screen and (max-width: 799px) {
+            .sponsorship-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .tier-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="container">
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 32px; margin-bottom: 20px; color: #231F20; text-align: center;">Sponsorship Tiers</h2>
+        
+        <div class="sponsorship-grid">
+            <div class="tier-card">
+                <div class="tier-badge">Premium</div>
+                <div class="tier-header">
+                    <div class="tier-name">Pioneers</div>
+                    <div class="tier-contribution">$1.5M+</div>
+                </div>
+                <div class="tier-highlights">
+                    Shape the direction of the industry. Gain top-tier access to insights, strategy sessions, and collaborative campaign development.
+                </div>
+            </div>
+            
+            <div class="tier-card">
+                <div class="tier-header">
+                    <div class="tier-name">Strategists</div>
+                    <div class="tier-contribution">$750K</div>
+                </div>
+                <div class="tier-highlights">
+                    Influence key decisions with a seat at strategic planning meetings. Receive early briefings and policy updates.
+                </div>
+            </div>
+            
+            <div class="tier-card">
+                <div class="tier-header">
+                    <div class="tier-name">Innovators</div>
+                    <div class="tier-contribution">$300K</div>
+                </div>
+                <div class="tier-highlights">
+                    Join influential working groups and help launch pilot programs that test and scale new retail concepts.
+                </div>
+            </div>
+            
+            <div class="tier-card">
+                <div class="tier-header">
+                    <div class="tier-name">Partners</div>
+                    <div class="tier-contribution">$100K</div>
+                </div>
+                <div class="tier-highlights">
+                    Enjoy high-visibility branding, shoutouts across digital platforms, and recognition as a trusted contributor to future-forward retail.
+                </div>
+            </div>
+            
+            <div class="tier-card">
+                <div class="tier-header">
+                    <div class="tier-name">Supporters</div>
+                    <div class="tier-contribution">$10K - $50K</div>
+                </div>
+                <div class="tier-highlights">
+                    Earn a featured badge and acknowledgment on our community wall for advancing responsible, modern retail practices.
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script src="js/jquery-3.2.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.tier-card').each(function(i) {
+                setTimeout(function() {
+                    $('.tier-card').eq(i).css('opacity', '0').animate({opacity: 1}, 600);
+                }, 100 * i);
+            });
+        });
+    </script>
+</body>
+</html>
