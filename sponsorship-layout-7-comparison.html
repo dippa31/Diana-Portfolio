@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sponsorship Tiers - Comparison Matrix</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/normalize.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .comparison-container {
+            margin: 40px 0;
+            overflow-x: auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(35, 31, 32, 0.1);
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 20px 15px;
+            text-align: center;
+            border-right: 1px solid #F0F0F0;
+        }
+        
+        .comparison-table th:last-child,
+        .comparison-table td:last-child {
+            border-right: none;
+        }
+        
+        .tier-header-row th {
+            background: linear-gradient(135deg, #231F20, #2a2526);
+            color: #F9F9F9;
+            font-family: "Cormorant Garamond", serif;
+            font-size: 20px;
+            font-weight: bold;
+            position: relative;
+        }
+        
+        .tier-header-row th:first-child {
+            background: #F9F9F9;
+            color: #231F20;
+        }
+        
+        .price-row {
+            background: #F9F9F9;
+        }
+        
+        .price-row td {
+            font-size: 24px;
+            font-weight: bold;
+            color: #24ACA8;
+            padding: 25px 15px;
+        }
+        
+        .price-row td:first-child {
+            font-size: 16px;
+            font-weight: normal;
+            color: #231F20;
+            text-align: left;
+            font-family: "Cormorant Garamond", serif;
+        }
+        
+        .price-row td:nth-child(2) { color: #24ACA8; }
+        .price-row td:nth-child(3) { color: #5974B4; }
+        .price-row td:nth-child(4) { color: #8E3DC1; }
+        .price-row td:nth-child(5) { color: #B019C9; }
+        .price-row td:nth-child(6) { color: #231F20; }
+        
+        .feature-row {
+            border-bottom: 1px solid #F0F0F0;
+            transition: all 0.2s ease;
+        }
+        
+        .feature-row:hover {
+            background: rgba(249, 249, 249, 0.8);
+        }
+        
+        .feature-row td:first-child {
+            text-align: left;
+            font-family: "Cormorant Garamond", serif;
+            font-size: 16px;
+            font-weight: bold;
+            color: #231F20;
+            background: rgba(249, 249, 249, 0.5);
+        }
+        
+        .check-mark {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #24ACA8;
+            color: white;
+            line-height: 24px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .feature-row td:nth-child(2) .check-mark { background: #24ACA8; }
+        .feature-row td:nth-child(3) .check-mark { background: #5974B4; }
+        .feature-row td:nth-child(4) .check-mark { background: #8E3DC1; }
+        .feature-row td:nth-child(5) .check-mark { background: #B019C9; }
+        .feature-row td:nth-child(6) .check-mark { background: #231F20; }
+        
+        .not-included {
+            color: #ccc;
+            font-size: 20px;
+        }
+        
+        .premium-badge {
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            background: #24ACA8;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 10px;
+            font-size: 10px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        
+        .cta-row {
+            background: #F9F9F9;
+        }
+        
+        .cta-row td {
+            padding: 30px 15px;
+        }
+        
+        .cta-row td:first-child {
+            background: transparent;
+        }
+        
+        .cta-button-comp {
+            background: #24ACA8;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 150px;
+        }
+        
+        .cta-row td:nth-child(2) .cta-button-comp { background: #24ACA8; }
+        .cta-row td:nth-child(3) .cta-button-comp { background: #5974B4; }
+        .cta-row td:nth-child(4) .cta-button-comp { background: #8E3DC1; }
+        .cta-row td:nth-child(5) .cta-button-comp { background: #B019C9; }
+        .cta-row td:nth-child(6) .cta-button-comp { background: #231F20; }
+        
+        .cta-button-comp:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(35, 31, 32, 0.3);
+        }
+        
+        @media screen and (max-width: 799px) {
+            .comparison-container {
+                margin: 20px -20px;
+                border-radius: 0;
+            }
+            
+            .comparison-table th,
+            .comparison-table td {
+                padding: 15px 10px;
+                font-size: 14px;
+            }
+            
+            .tier-header-row th {
+                font-size: 16px;
+            }
+            
+            .price-row td {
+                font-size: 18px;
+            }
+            
+            .cta-button-comp {
+                font-size: 12px;
+                padding: 10px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="container">
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 36px; margin-bottom: 20px; color: #231F20; text-align: center;">Partnership Comparison</h2>
+        
+        <div class="comparison-container">
+            <table class="comparison-table">
+                <thead>
+                    <tr class="tier-header-row">
+                        <th>Features</th>
+                        <th>Pioneers<div class="premium-badge">Premium</div></th>
+                        <th>Strategists</th>
+                        <th>Innovators</th>
+                        <th>Partners</th>
+                        <th>Supporters</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="price-row">
+                        <td>Annual Investment</td>
+                        <td>$1.5M+</td>
+                        <td>$750K</td>
+                        <td>$300K</td>
+                        <td>$100K</td>
+                        <td>$10K - $50K</td>
+                    </tr>
+                    
+                    <tr class="feature-row">
+                        <td>Industry Leadership</td>
+                        <td><span class="check-mark">✓</span></td>
+                        <td><span class="not-included">−</span></td>
+                        <td><span class="not-included">−</span></td>
+                        <td><span class="not-included">−</span></td>
+                        <td><span class="not-included">−</span></td>
+                    </tr>
+                    
+                    <tr class="feature-row">
+                        <td>Strategy Sessions</td>
+                        <td><span class="check-mark">✓</span></td>
+                        <td><span class="check-mark">✓</span></td>
+                        <td><span class="not-included">−</span></td>
+                        <td><span class="not-included">−</span></td>
+                        <td><span class="not-included">−</span></td>
+                    </tr>
+                    
+                    <tr class="feature-row">
+                        <td>Early Briefings</td>
+                        <td><span class="check-mark">✓</span></td>
+                        <td><span class="check-mark">✓</span></td>
+                        <td><span class="not-included">−</span></td>
+                        <td><span class="not-included">−</span></td>
+                        <td><span class="not-included">−</span></td>
+                    </tr>
+                    
+                    <tr class="feature-row">
+                        <td>Working Groups</td>
+                        <td><span class="check-mark">✓</span></td>
+                        <td><span class="check-mark">✓</span></td>
+                        <td><span class="check-mark">✓</span></td>
+                        <td><span class="not-included">−</span></td>
+                        <td><span class="not-included">−</span></td>
+                    </tr>
+                    
+                    <tr class="feature-row">
+                        <td>Pilot Programs</td>
+                        <td><span class="check-mark">✓</span></td>
+                        <td><span class="check-mark">✓</span></td>
+                        <td><span class="check-mark">✓</span></td>
+                        <td><span class="not-included">−</span></td>
+                        <td><span class="not-included">−</span></td>
+                    </tr>
+                    
+                    <tr class="feature-row">
+                        <td>Brand Visibility</td>
+                        <td><span class="check-mark">✓</span></td>
+                        <td><span class="check-mark">✓</span></td>
+                        <td><span class="check-mark">✓</span></td>
+                        <td><span class="check-mark">✓</span></td>
+                        <td><span class="not-included">−</span></td>
+                    </tr>
+                    
+                    <tr class="feature-row">
+                        <td>Digital Recognition</td>
+                        <td><span class="check-mark">✓</span></td>
+                        <td><span class="check-mark">✓</span></td>
+                        <td><span class="check-mark">✓</span></td>
+                        <td><span class="check-mark">✓</span></td>
+                        <td><span class="check-mark">✓</span></td>
+                    </tr>
+                    
+                    <tr class="feature-row">
+                        <td>Community Wall</td>
+                        <td><span class="check-mark">✓</span></td>
+                        <td><span class="check-mark">✓</span></td>
+                        <td><span class="check-mark">✓</span></td>
+                        <td><span class="check-mark">✓</span></td>
+                        <td><span class="check-mark">✓</span></td>
+                    </tr>
+                    
+                    <tr class="cta-row">
+                        <td></td>
+                        <td><button class="cta-button-comp">Choose Plan</button></td>
+                        <td><button class="cta-button-comp">Choose Plan</button></td>
+                        <td><button class="cta-button-comp">Choose Plan</button></td>
+                        <td><button class="cta-button-comp">Choose Plan</button></td>
+                        <td><button class="cta-button-comp">Choose Plan</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    
+    <script src="js/jquery-3.2.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Animate check marks on scroll
+            const checkMarks = $('.check-mark');
+            
+            $(window).scroll(function() {
+                checkMarks.each(function() {
+                    const elementTop = $(this).offset().top;
+                    const elementBottom = elementTop + $(this).outerHeight();
+                    const viewportTop = $(window).scrollTop();
+                    const viewportBottom = viewportTop + $(window).height();
+                    
+                    if (elementBottom > viewportTop && elementTop < viewportBottom) {
+                        $(this).css('animation', 'pulse 0.6s ease-in-out');
+                    }
+                });
+            });
+        });
+    </script>
+    
+    <style>
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</body>
+</html>

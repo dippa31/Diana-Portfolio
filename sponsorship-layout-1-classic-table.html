@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sponsorship Tiers - Classic Table</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/normalize.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .sponsorship-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 40px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(35, 31, 32, 0.1);
+        }
+        
+        .sponsorship-table th,
+        .sponsorship-table td {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 1px solid #F0F0F0;
+        }
+        
+        .sponsorship-table th {
+            background-color: #231F20;
+            color: #F9F9F9;
+            font-family: "Cormorant Garamond", serif;
+            font-size: 18px;
+            font-weight: normal;
+        }
+        
+        .tier-name {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 20px;
+            font-weight: bold;
+            color: #231F20;
+        }
+        
+        .contribution {
+            font-size: 24px;
+            font-weight: bold;
+            color: #24ACA8;
+        }
+        
+        .highlights {
+            line-height: 1.6;
+            max-width: 400px;
+        }
+        
+        @media screen and (max-width: 799px) {
+            .sponsorship-table,
+            .sponsorship-table thead,
+            .sponsorship-table tbody,
+            .sponsorship-table th,
+            .sponsorship-table td,
+            .sponsorship-table tr {
+                display: block;
+            }
+            
+            .sponsorship-table thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+            
+            .sponsorship-table tr {
+                border: 1px solid #F0F0F0;
+                margin-bottom: 20px;
+                background: white;
+                border-radius: 8px;
+                padding: 20px;
+            }
+            
+            .sponsorship-table td {
+                border: none;
+                padding: 10px 0;
+                position: relative;
+                padding-left: 30%;
+            }
+            
+            .sponsorship-table td:before {
+                content: attr(data-label) ": ";
+                position: absolute;
+                left: 0;
+                width: 25%;
+                font-weight: bold;
+                color: #231F20;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="container">
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 32px; margin-bottom: 20px; color: #231F20;">Sponsorship Tiers</h2>
+        
+        <table class="sponsorship-table">
+            <thead>
+                <tr>
+                    <th>Tier</th>
+                    <th>Annual Contribution</th>
+                    <th>Highlights</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-label="Tier" class="tier-name">Pioneers</td>
+                    <td data-label="Annual Contribution" class="contribution">$1.5M+</td>
+                    <td data-label="Highlights" class="highlights">Shape the direction of the industry. Gain top-tier access to insights, strategy sessions, and collaborative campaign development.</td>
+                </tr>
+                <tr>
+                    <td data-label="Tier" class="tier-name">Strategists</td>
+                    <td data-label="Annual Contribution" class="contribution">$750K</td>
+                    <td data-label="Highlights" class="highlights">Influence key decisions with a seat at strategic planning meetings. Receive early briefings and policy updates.</td>
+                </tr>
+                <tr>
+                    <td data-label="Tier" class="tier-name">Innovators</td>
+                    <td data-label="Annual Contribution" class="contribution">$300K</td>
+                    <td data-label="Highlights" class="highlights">Join influential working groups and help launch pilot programs that test and scale new retail concepts.</td>
+                </tr>
+                <tr>
+                    <td data-label="Tier" class="tier-name">Partners</td>
+                    <td data-label="Annual Contribution" class="contribution">$100K</td>
+                    <td data-label="Highlights" class="highlights">Enjoy high-visibility branding, shoutouts across digital platforms, and recognition as a trusted contributor to future-forward retail.</td>
+                </tr>
+                <tr>
+                    <td data-label="Tier" class="tier-name">Supporters</td>
+                    <td data-label="Annual Contribution" class="contribution">$10K - $50K</td>
+                    <td data-label="Highlights" class="highlights">Earn a featured badge and acknowledgment on our community wall for advancing responsible, modern retail practices.</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sponsorship Tiers - Timeline</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/normalize.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .timeline-container {
+            margin: 40px 0;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #F9F9F9 0%, white 100%);
+            border-radius: 20px;
+            position: relative;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #24ACA8, #5974B4, #8E3DC1, #B019C9, #231F20);
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 60px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            flex-direction: row;
+        }
+        
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .timeline-content {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 30px rgba(35, 31, 32, 0.1);
+            width: 45%;
+            position: relative;
+            transition: all 0.3s ease;
+            border-left: 5px solid #24ACA8;
+        }
+        
+        .timeline-item:nth-child(1) .timeline-content { border-left-color: #24ACA8; }
+        .timeline-item:nth-child(2) .timeline-content { border-left-color: #5974B4; }
+        .timeline-item:nth-child(3) .timeline-content { border-left-color: #8E3DC1; }
+        .timeline-item:nth-child(4) .timeline-content { border-left-color: #B019C9; }
+        .timeline-item:nth-child(5) .timeline-content { border-left-color: #231F20; }
+        
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(35, 31, 32, 0.15);
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            content: '';
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border: 15px solid transparent;
+            border-left: 15px solid white;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border: 15px solid transparent;
+            border-right: 15px solid white;
+        }
+        
+        .timeline-marker {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: white;
+            border: 6px solid #24ACA8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(35, 31, 32, 0.1);
+        }
+        
+        .timeline-item:nth-child(1) .timeline-marker { border-color: #24ACA8; color: #24ACA8; }
+        .timeline-item:nth-child(2) .timeline-marker { border-color: #5974B4; color: #5974B4; }
+        .timeline-item:nth-child(3) .timeline-marker { border-color: #8E3DC1; color: #8E3DC1; }
+        .timeline-item:nth-child(4) .timeline-marker { border-color: #B019C9; color: #B019C9; }
+        .timeline-item:nth-child(5) .timeline-marker { border-color: #231F20; color: #231F20; }
+        
+        .tier-title {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 28px;
+            font-weight: bold;
+            color: #231F20;
+            margin-bottom: 10px;
+        }
+        
+        .tier-price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #24ACA8;
+            margin-bottom: 15px;
+        }
+        
+        .timeline-item:nth-child(1) .tier-price { color: #24ACA8; }
+        .timeline-item:nth-child(2) .tier-price { color: #5974B4; }
+        .timeline-item:nth-child(3) .tier-price { color: #8E3DC1; }
+        .timeline-item:nth-child(4) .tier-price { color: #B019C9; }
+        .timeline-item:nth-child(5) .tier-price { color: #231F20; }
+        
+        .tier-desc {
+            line-height: 1.6;
+            color: #231F20;
+            margin-bottom: 20px;
+        }
+        
+        .tier-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .feature-pill {
+            background: rgba(36, 172, 168, 0.1);
+            color: #24ACA8;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .timeline-item:nth-child(1) .feature-pill { background: rgba(36, 172, 168, 0.1); color: #24ACA8; }
+        .timeline-item:nth-child(2) .feature-pill { background: rgba(89, 116, 180, 0.1); color: #5974B4; }
+        .timeline-item:nth-child(3) .feature-pill { background: rgba(142, 61, 193, 0.1); color: #8E3DC1; }
+        .timeline-item:nth-child(4) .feature-pill { background: rgba(176, 25, 201, 0.1); color: #B019C9; }
+        .timeline-item:nth-child(5) .feature-pill { background: rgba(35, 31, 32, 0.1); color: #231F20; }
+        
+        @media screen and (max-width: 799px) {
+            .timeline::before {
+                left: 40px;
+            }
+            
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                flex-direction: row;
+            }
+            
+            .timeline-content {
+                width: calc(100% - 100px);
+                margin-left: 60px;
+            }
+            
+            .timeline-content::before,
+            .timeline-item:nth-child(even) .timeline-content::before {
+                left: -15px;
+                right: auto;
+                border: 15px solid transparent;
+                border-right: 15px solid white;
+                border-left: none;
+            }
+            
+            .timeline-marker {
+                left: 40px;
+                width: 60px;
+                height: 60px;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="container">
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 36px; margin-bottom: 20px; color: #231F20; text-align: center;">Partnership Journey</h2>
+        
+        <div class="timeline-container">
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker">👑</div>
+                    <div class="timeline-content">
+                        <div class="tier-title">Pioneers</div>
+                        <div class="tier-price">$1.5M+</div>
+                        <div class="tier-desc">
+                            Shape the direction of the industry. Gain top-tier access to insights, strategy sessions, and collaborative campaign development.
+                        </div>
+                        <div class="tier-features">
+                            <span class="feature-pill">Industry Leadership</span>
+                            <span class="feature-pill">Strategy Sessions</span>
+                            <span class="feature-pill">Campaign Development</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker">🎯</div>
+                    <div class="timeline-content">
+                        <div class="tier-title">Strategists</div>
+                        <div class="tier-price">$750K</div>
+                        <div class="tier-desc">
+                            Influence key decisions with a seat at strategic planning meetings. Receive early briefings and policy updates.
+                        </div>
+                        <div class="tier-features">
+                            <span class="feature-pill">Strategic Planning</span>
+                            <span class="feature-pill">Early Briefings</span>
+                            <span class="feature-pill">Policy Updates</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker">💡</div>
+                    <div class="timeline-content">
+                        <div class="tier-title">Innovators</div>
+                        <div class="tier-price">$300K</div>
+                        <div class="tier-desc">
+                            Join influential working groups and help launch pilot programs that test and scale new retail concepts.
+                        </div>
+                        <div class="tier-features">
+                            <span class="feature-pill">Working Groups</span>
+                            <span class="feature-pill">Pilot Programs</span>
+                            <span class="feature-pill">Innovation</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker">🤝</div>
+                    <div class="timeline-content">
+                        <div class="tier-title">Partners</div>
+                        <div class="tier-price">$100K</div>
+                        <div class="tier-desc">
+                            Enjoy high-visibility branding, shoutouts across digital platforms, and recognition as a trusted contributor to future-forward retail.
+                        </div>
+                        <div class="tier-features">
+                            <span class="feature-pill">Brand Visibility</span>
+                            <span class="feature-pill">Digital Recognition</span>
+                            <span class="feature-pill">Platform Shoutouts</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker">⭐</div>
+                    <div class="timeline-content">
+                        <div class="tier-title">Supporters</div>
+                        <div class="tier-price">$10K - $50K</div>
+                        <div class="tier-desc">
+                            Earn a featured badge and acknowledgment on our community wall for advancing responsible, modern retail practices.
+                        </div>
+                        <div class="tier-features">
+                            <span class="feature-pill">Featured Badge</span>
+                            <span class="feature-pill">Community Wall</span>
+                            <span class="feature-pill">Recognition</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script src="js/jquery-3.2.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.timeline-item').each(function(i) {
+                $(this).css('opacity', '0').css('transform', 'translateX(' + (i % 2 === 0 ? '-50px' : '50px') + ')');
+                setTimeout(function() {
+                    $('.timeline-item').eq(i).animate({
+                        opacity: 1,
+                        transform: 'translateX(0)'
+                    }, 800);
+                }, 300 * i);
+            });
+        });
+    </script>
+</body>
+</html>

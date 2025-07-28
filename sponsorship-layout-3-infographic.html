@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sponsorship Tiers - Infographic</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/normalize.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .infographic-container {
+            background: linear-gradient(135deg, #F9F9F9 0%, #F0F0F0 100%);
+            padding: 60px 20px;
+            margin: 40px 0;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .infographic-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #24ACA8, #5974B4, #8E3DC1, #B019C9, #231F20);
+        }
+        
+        .tier-pyramid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .tier-level {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            border-radius: 15px;
+            padding: 25px 30px;
+            box-shadow: 0 6px 25px rgba(35, 31, 32, 0.1);
+            width: 100%;
+            max-width: 800px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .tier-level:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 35px rgba(35, 31, 32, 0.15);
+        }
+        
+        .tier-level:nth-child(1) { max-width: 900px; }
+        .tier-level:nth-child(2) { max-width: 800px; }
+        .tier-level:nth-child(3) { max-width: 700px; }
+        .tier-level:nth-child(4) { max-width: 600px; }
+        .tier-level:nth-child(5) { max-width: 500px; }
+        
+        .tier-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            font-weight: bold;
+            margin-right: 25px;
+            flex-shrink: 0;
+        }
+        
+        .tier-level:nth-child(1) .tier-icon { background: #24ACA8; }
+        .tier-level:nth-child(2) .tier-icon { background: #5974B4; }
+        .tier-level:nth-child(3) .tier-icon { background: #8E3DC1; }
+        .tier-level:nth-child(4) .tier-icon { background: #B019C9; }
+        .tier-level:nth-child(5) .tier-icon { background: #231F20; }
+        
+        .tier-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .tier-header-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .tier-name-info {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 24px;
+            font-weight: bold;
+            color: #231F20;
+        }
+        
+        .tier-amount {
+            font-size: 28px;
+            font-weight: bold;
+            color: #24ACA8;
+        }
+        
+        .tier-level:nth-child(1) .tier-amount { color: #24ACA8; }
+        .tier-level:nth-child(2) .tier-amount { color: #5974B4; }
+        .tier-level:nth-child(3) .tier-amount { color: #8E3DC1; }
+        .tier-level:nth-child(4) .tier-amount { color: #B019C9; }
+        .tier-level:nth-child(5) .tier-amount { color: #231F20; }
+        
+        .tier-description {
+            line-height: 1.6;
+            color: #231F20;
+            font-size: 16px;
+        }
+        
+        .tier-benefits {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .benefit-tag {
+            background: #F0F0F0;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #231F20;
+            font-weight: bold;
+        }
+        
+        .tier-level:nth-child(1) .benefit-tag { background: rgba(36, 172, 168, 0.1); color: #24ACA8; }
+        .tier-level:nth-child(2) .benefit-tag { background: rgba(89, 116, 180, 0.1); color: #5974B4; }
+        .tier-level:nth-child(3) .benefit-tag { background: rgba(142, 61, 193, 0.1); color: #8E3DC1; }
+        .tier-level:nth-child(4) .benefit-tag { background: rgba(176, 25, 201, 0.1); color: #B019C9; }
+        .tier-level:nth-child(5) .benefit-tag { background: rgba(35, 31, 32, 0.1); color: #231F20; }
+        
+        @media screen and (max-width: 799px) {
+            .tier-level {
+                flex-direction: column;
+                text-align: center;
+                max-width: 100% !important;
+            }
+            
+            .tier-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .tier-header-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .tier-benefits {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="container">
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 36px; margin-bottom: 20px; color: #231F20; text-align: center;">Partnership Investment Levels</h2>
+        
+        <div class="infographic-container">
+            <div class="tier-pyramid">
+                <div class="tier-level">
+                    <div class="tier-icon">👑</div>
+                    <div class="tier-content">
+                        <div class="tier-header-info">
+                            <div class="tier-name-info">Pioneers</div>
+                            <div class="tier-amount">$1.5M+</div>
+                        </div>
+                        <div class="tier-description">
+                            Shape the direction of the industry. Gain top-tier access to insights, strategy sessions, and collaborative campaign development.
+                        </div>
+                        <div class="tier-benefits">
+                            <span class="benefit-tag">Industry Leadership</span>
+                            <span class="benefit-tag">Strategy Access</span>
+                            <span class="benefit-tag">Campaign Development</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tier-level">
+                    <div class="tier-icon">🎯</div>
+                    <div class="tier-content">
+                        <div class="tier-header-info">
+                            <div class="tier-name-info">Strategists</div>
+                            <div class="tier-amount">$750K</div>
+                        </div>
+                        <div class="tier-description">
+                            Influence key decisions with a seat at strategic planning meetings. Receive early briefings and policy updates.
+                        </div>
+                        <div class="tier-benefits">
+                            <span class="benefit-tag">Strategic Planning</span>
+                            <span class="benefit-tag">Early Briefings</span>
+                            <span class="benefit-tag">Policy Updates</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tier-level">
+                    <div class="tier-icon">💡</div>
+                    <div class="tier-content">
+                        <div class="tier-header-info">
+                            <div class="tier-name-info">Innovators</div>
+                            <div class="tier-amount">$300K</div>
+                        </div>
+                        <div class="tier-description">
+                            Join influential working groups and help launch pilot programs that test and scale new retail concepts.
+                        </div>
+                        <div class="tier-benefits">
+                            <span class="benefit-tag">Working Groups</span>
+                            <span class="benefit-tag">Pilot Programs</span>
+                            <span class="benefit-tag">Retail Innovation</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tier-level">
+                    <div class="tier-icon">🤝</div>
+                    <div class="tier-content">
+                        <div class="tier-header-info">
+                            <div class="tier-name-info">Partners</div>
+                            <div class="tier-amount">$100K</div>
+                        </div>
+                        <div class="tier-description">
+                            Enjoy high-visibility branding, shoutouts across digital platforms, and recognition as a trusted contributor to future-forward retail.
+                        </div>
+                        <div class="tier-benefits">
+                            <span class="benefit-tag">Brand Visibility</span>
+                            <span class="benefit-tag">Digital Recognition</span>
+                            <span class="benefit-tag">Platform Shoutouts</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tier-level">
+                    <div class="tier-icon">⭐</div>
+                    <div class="tier-content">
+                        <div class="tier-header-info">
+                            <div class="tier-name-info">Supporters</div>
+                            <div class="tier-amount">$10K - $50K</div>
+                        </div>
+                        <div class="tier-description">
+                            Earn a featured badge and acknowledgment on our community wall for advancing responsible, modern retail practices.
+                        </div>
+                        <div class="tier-benefits">
+                            <span class="benefit-tag">Featured Badge</span>
+                            <span class="benefit-tag">Community Wall</span>
+                            <span class="benefit-tag">Recognition</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script src="js/jquery-3.2.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.tier-level').each(function(i) {
+                $(this).css('opacity', '0').css('transform', 'translateY(30px)');
+                setTimeout(function() {
+                    $('.tier-level').eq(i).animate({
+                        opacity: 1,
+                        translateY: 0
+                    }, 600);
+                }, 200 * i);
+            });
+        });
+    </script>
+</body>
+</html>
